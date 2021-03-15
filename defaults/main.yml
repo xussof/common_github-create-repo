@@ -1,0 +1,7 @@
+#github_create_repo:
+#  1:
+#    repo_name: repo4
+#    workspace: arsolute
+#    project: test
+#    is_private: private/public
+#    scm: git

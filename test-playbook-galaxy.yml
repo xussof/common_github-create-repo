@@ -1,0 +1,41 @@
+#ansible-playbook test-playbook-galaxy.yml --extra-vars "ansible_become_pass=sudo_pass"
+#To run without installing software dependencies
+#ansible-playbook test-playbook-galaxy.yml --extra-vars "ansible_become_pass=sudo_pass" --skip-tags "software"
+- hosts: localhost
+
+  vars_files:
+    - ../../../../group_vars/all.yml
+
+  tasks:
+    - name: Tempalte mainyml.j2
+      template:
+        src: meta/mainyml.j2
+        dest: meta/main.yml
+
+    - name: Tempalte mainyml.j2
+      template:
+        src: requirementsyml.j2
+        dest: requirements.yml
+
+- hosts: localhost
+
+  pre_tasks:
+     - raw:  ansible-galaxy role install -r requirements.yml
+
+  vars_files:
+    - "../../../../group_vars/all.yml"
+    - "../../../../group_vars/encrypted.yml"
+
+  vars:
+    bitbucket_create_repo:
+      1:
+        repo_name: "helm-test-role"
+        workspace: "{{ bitbucket_workspace }}"
+        project: GITH
+        is_private: true
+        scm: git
+
+  tasks:
+    - name: Including role to test
+      include_role:
+        name: '../common_github-create-repo'

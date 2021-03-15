@@ -1,0 +1,9 @@
+- name: Let's create repository on github
+  github_repo:
+    github_auth_key: "{{ github_password }}"
+    name: "{{ item.value.repo_name }}"
+    description: "{{ item.value.repo_name }}"
+    private: "{{ item.value.is_private }}"
+    has_issues: no
+    has_wiki: no
+    has_downloads: no

@@ -1,0 +1,10 @@
+---
+collections:
+# With just the collection name
+- community.general
+
+roles:
+- src: git@github.com:xussof/common_github-create-repo
+  scm: git
+  version: master
+  name: common_github-create-repo
