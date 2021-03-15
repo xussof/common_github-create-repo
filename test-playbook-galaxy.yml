@@ -27,11 +27,11 @@
     - "../../../../group_vars/encrypted.yml"
 
   vars:
-    bitbucket_create_repo:
+    github_create_repo:
       1:
-        repo_name: "helm-test-role"
-        workspace: "{{ bitbucket_workspace }}"
-        project: GITH
+        repo_name: "terraform-aws-staging-full"
+        workspace: "{{ github_workspace }}"
+        project: "gitops-terraform"
         is_private: true
         scm: git
 
